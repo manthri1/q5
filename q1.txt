@@ -1,0 +1,81 @@
+To implement user input validation using regular expressions for a student login page, you need to ensure that the input (typically username and password) adheres to specific formats or criteria. Here's a step-by-step guide on how to do this using HTML and JavaScript:
+
+Step 1: Basic HTML Form
+Create a simple HTML form for the login page:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Student Login</h2>
+    <form id="loginForm" action="#" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <span id="usernameError" class="error"></span>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="passwordError" class="error"></span>
+        <br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script src="validation.js"></script>
+</body>
+</html>
+Step 2: JavaScript for Validation (validation.js)
+Create a JavaScript file named validation.js to handle the input validation using regular expressions:
+
+javascript
+Copy code
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    // Clear previous error messages
+    document.getElementById('usernameError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+
+    // Regular expressions for validation
+    const usernameRegex = /^[a-zA-Z0-9._-]{5,20}$/; // Example: Alphanumeric, 5-20 characters
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Example: Minimum 8 characters, at least one letter and one number
+
+    // Get input values
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Validate username
+    if (!usernameRegex.test(username)) {
+        document.getElementById('usernameError').textContent = 'Invalid username. Must be 5-20 characters, alphanumeric.';
+        event.preventDefault();
+    }
+
+    // Validate password
+    if (!passwordRegex.test(password)) {
+        document.getElementById('passwordError').textContent = 'Invalid password. Minimum 8 characters, at least one letter and one number.';
+        event.preventDefault();
+    }
+});
+Explanation
+HTML Form: The form includes fields for username and password, along with span elements to display error messages.
+JavaScript Validation:
+Event Listener: Adds a submit event listener to the form.
+Clear Errors: Clears any previous error messages.
+Regular Expressions: Defines regex patterns for username and password validation.
+Get Values: Retrieves the values entered by the user.
+Validation Checks: Uses test() method to validate the input against the regex patterns.
+Error Handling: If validation fails, an error message is displayed, and the form submission is prevented using event.preventDefault().
+Regular Expression Patterns
+Username: ^[a-zA-Z0-9._-]{5,20}$
+Allows alphanumeric characters, dots, underscores, and hyphens.
+Length between 5 to 20 characters.
+Password: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Minimum eight characters.
+At least one letter and one number.
+This setup ensures that user inputs meet the specified criteria before allowing form submission, providing a layer of input validation directly on the client side.
