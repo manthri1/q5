@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Student Login</h2>
+    <form id="loginForm" action="#" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <span id="usernameError" class="error"></span>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="passwordError" class="error"></span>
+        <br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script src="validation.js"></script>
+</body>
+</html>
